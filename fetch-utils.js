@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const SUPABASE_URL = 'https://gxwgjhfyrlwiqakdeamc.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNjQxMTMxMiwiZXhwIjoxOTUxOTg3MzEyfQ.PHekiwfLxT73qQsLklp0QFEfNx9NlmkssJFDnlvNIcA';
 
@@ -28,6 +29,18 @@ export async function updateHead(value){
 
     return checkError(response);    
 }
+
+// export async function updateHead(value){
+//     const user = await getUser();
+
+//     const response = await client
+//         .from('characters')
+//         .update({ head: value })
+//         .match({ user_id: user.user.id })
+//         .single();
+
+//     return checkError(response);
+// }
 
 
 export async function updateMiddle(value){
