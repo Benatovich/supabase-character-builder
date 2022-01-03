@@ -6,7 +6,7 @@ import {
     updateBottom,
     updateHead,
     updateMiddle,
-    updateChatchphrases
+    updateCatchphrases
 } from '../fetch-utils.js';
 
 checkAuth();
@@ -18,7 +18,7 @@ const headEl = document.getElementById('head');
 const middleEl = document.getElementById('middle');
 const bottomEl = document.getElementById('bottom');
 const reportEl = document.getElementById('report');
-const chatchphrasesEl = document.getElementById('chatchphrases');
+const catchphrasesEl = document.getElementById('catchphrases');
 const catchphraseInput = document.getElementById('catchphrase-input');
 const catchphraseButton = document.getElementById('catchphrase-button');
 const logoutButton = document.getElementById('logout');
@@ -27,10 +27,16 @@ const logoutButton = document.getElementById('logout');
 let headCount = 0;
 let middleCount = 0;
 let bottomCount = 0;
+let catchphraseArray = [];
 
 headDropdown.addEventListener('change', async() => {
+    const updatedHead = await updateHead(headDropdown.value);
+    headEl.textContent = '';
+    let img = document.createElement('img');
+    img.src = `./assets/${updatedHead}-head.png`;
+    headEl.append(img);
     // increment the correct count in state
-
+    headCount++;
     // update the head in supabase with the correct data
     refreshData();
 });

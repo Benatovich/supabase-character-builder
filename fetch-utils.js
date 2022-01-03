@@ -21,6 +21,10 @@ export async function updateHead(value){
 
     // in supabase, update the head property
     // for the character whose user_id match's the currently logged in user's id
+    const response = await client
+        .from('characters')
+        .update({ head: value })
+        .match({ user_id: currentUserId });    
 
     return checkError(response);    
 }
@@ -31,6 +35,10 @@ export async function updateMiddle(value){
 
     // in supabase, update the middle property
     // for the character whose user_id match's the currently logged in user's id
+    const response = await client
+        .from('characters')
+        .update({ middle: value })
+        .match({ user_id: currentUserId });    
 
     return checkError(response);    
 }
@@ -41,15 +49,23 @@ export async function updateBottom(value){
 
     // in supabase, update the bottom property
     // for the character whose user_id match's the currently logged in user's id
+    const response = await client
+        .from('characters')
+        .update({ bottom: value })
+        .match({ user_id: currentUserId });    
 
     return checkError(response);    
 }
 
-export async function updateChatchphrases(value){
+export async function updateCatchphrases(value){
     const currentUserId = client.auth.user().id;
 
     // in supabase, update the catchphrases property
     // for the character whose user_id match's the currently logged in user's id
+    const response = await client
+        .from('characters')
+        .update({ catchphrases: value })
+        .match({ user_id: currentUserId });    
 
     return checkError(response);    
 }
@@ -101,13 +117,15 @@ export async function redirectToBuild() {
 export async function signupUser(email, password){
     const response = await client.auth.signUp({ email, password });
     
-    return response.user;
+    return checkError(response);
+    // return response.user;
 }
 
 export async function signInUser(email, password){
     const response = await client.auth.signIn({ email, password });
 
-    return response.user;
+    return checkError(response);
+    // return response.user;
 }
 
 export async function logout() {
