@@ -40,27 +40,32 @@ headDropdown.addEventListener('change', async() => {
 
 middleDropdown.addEventListener('change', async() => {
     // increment the correct count in state
-    
+    middleCount++;
     // update the middle in supabase with the correct data
+    await updateMiddle(middleDropdown.value);
     refreshData();
 });
 
 
 bottomDropdown.addEventListener('change', async() => {
     // increment the correct count in state
-    
+    bottomCount++;
     // update the bottom in supabase with the correct data
+    await updateBottom(bottomDropdown.value);
     refreshData();
 });
 
 catchphraseButton.addEventListener('click', async() => {
-    catchphraseInput.value = '';
-
     // go fetch the old catch phrases
-    
     // update the catchphrases array locally by pushing the new catchphrase into the old array
+    catchphrases.push(catchphraseInput.value);
 
+    catchphraseInput.value = '';
     // update the catchphrases in supabase by passing the mutated array to the updateCatchphrases function
+    await updateCatchphrases(catchphrases);
+
+    
+
     refreshData();
 });
 
