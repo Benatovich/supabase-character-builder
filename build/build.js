@@ -57,14 +57,13 @@ bottomDropdown.addEventListener('change', async() => {
 
 catchphraseButton.addEventListener('click', async() => {
     // go fetch the old catch phrases
+    // 
     // update the catchphrases array locally by pushing the new catchphrase into the old array
     catchphrases.push(catchphraseInput.value);
 
     catchphraseInput.value = '';
     // update the catchphrases in supabase by passing the mutated array to the updateCatchphrases function
     await updateCatchphrases(catchphrases);
-
-    
 
     refreshData();
 });

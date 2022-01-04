@@ -30,19 +30,6 @@ export async function updateHead(value){
     return checkError(response);    
 }
 
-// export async function updateHead(value){
-//     const user = await getUser();
-
-//     const response = await client
-//         .from('characters')
-//         .update({ head: value })
-//         .match({ user_id: user.user.id })
-//         .single();
-
-//     return checkError(response);
-// }
-
-
 export async function updateMiddle(value){
     const currentUserId = client.auth.user().id;
 
