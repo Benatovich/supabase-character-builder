@@ -1,13 +1,17 @@
+/* eslint-disable no-console */
 const SUPABASE_URL = 'https://gxwgjhfyrlwiqakdeamc.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNjQxMTMxMiwiZXhwIjoxOTUxOTg3MzEyfQ.PHekiwfLxT73qQsLklp0QFEfNx9NlmkssJFDnlvNIcA';
 
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 export async function createCharacter(character){
-    const newCharacter = {
-        ...character, 
-        user_id: client.auth.user().id, 
-    };
+    const response = await client
+        .from('characters')
+        .insert({
+            ...character, 
+            user_id: client.auth.user().id, 
+        })
+        .single();
 
     // use the newCharacter to create a single new character for this user in supabase
     return checkError(response);
@@ -18,16 +22,23 @@ export async function updateHead(value){
 
     // in supabase, update the head property
     // for the character whose user_id match's the currently logged in user's id
+    const response = await client
+        .from('characters')
+        .update({ head: value })
+        .match({ user_id: currentUserId });    
 
     return checkError(response);    
 }
-
 
 export async function updateMiddle(value){
     const currentUserId = client.auth.user().id;
 
     // in supabase, update the middle property
     // for the character whose user_id match's the currently logged in user's id
+    const response = await client
+        .from('characters')
+        .update({ middle: value })
+        .match({ user_id: currentUserId });    
 
     return checkError(response);    
 }
@@ -38,15 +49,23 @@ export async function updateBottom(value){
 
     // in supabase, update the bottom property
     // for the character whose user_id match's the currently logged in user's id
+    const response = await client
+        .from('characters')
+        .update({ bottom: value })
+        .match({ user_id: currentUserId });    
 
     return checkError(response);    
 }
 
-export async function updateChatchphrases(value){
+export async function updateCatchphrases(value){
     const currentUserId = client.auth.user().id;
 
     // in supabase, update the catchphrases property
     // for the character whose user_id match's the currently logged in user's id
+    const response = await client
+        .from('characters')
+        .update({ catchphrases: value })
+        .match({ user_id: currentUserId });    
 
     return checkError(response);    
 }
@@ -98,12 +117,14 @@ export async function redirectToBuild() {
 export async function signupUser(email, password){
     const response = await client.auth.signUp({ email, password });
     
+    // return checkError(response);
     return response.user;
 }
 
 export async function signInUser(email, password){
     const response = await client.auth.signIn({ email, password });
 
+    // return checkError(response);
     return response.user;
 }
 
