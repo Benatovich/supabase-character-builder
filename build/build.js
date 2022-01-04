@@ -57,7 +57,7 @@ bottomDropdown.addEventListener('change', async() => {
 
 catchphraseButton.addEventListener('click', async() => {
     // go fetch the old catch phrases
-    // 
+    // ^do i need anything for this here?
     // update the catchphrases array locally by pushing the new catchphrase into the old array
     catchphrases.push(catchphraseInput.value);
 
