@@ -76,9 +76,9 @@ window.addEventListener('load', async() => {
     // create a new character with correct defaults for all properties (head, middle, bottom, catchphrases)
     if (!character) {
         character = await createCharacter({
-            head: '',
-            middle: '',
-            bottom: '',
+            head: 'bird',
+            middle: 'blue',
+            bottom: 'leg',
             catchphrases: [],
         });
     }
